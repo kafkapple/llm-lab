@@ -1,0 +1,67 @@
+defaults:
+  - _self_
+  - model: bllossom
+# Task settings
+task_type: "emotion"  # Options: query, summary, emotion, chat
+
+# Language settings
+language:
+  response: "korean"  # Options: korean, english
+
+# Basic settings
+seed: 42
+max_new_tokens: 2048
+
+# Tasks configuration
+tasks:
+  emotion:
+    prompt: "Please analyze the emotion in the following text:"
+    format_instruction: |
+      Respond in this exact JSON format:
+      {
+        "emotion": "neutral/happy/sad/angry/fear/surprise/disgust",
+        "confidence": 0.0-1.0,
+        "reason": "your explanation",
+        "keywords": ["word1", "word2"]
+      }
+    template: "{prompt}\n\n{format_instruction}\n\nText: {text}"
+    generation:
+      temperature: 0.1
+      max_tokens: 100
+  
+  summary:
+    template:
+      korean: "다음 텍스트를 논리적 순서로 요약해주세요. 중복은 제거하고, 마크다운 형식으로 2-3단계 헤딩과 들여쓰기를 사용해주세요:\n{text}"
+      english: "Please summarize the following text in logical order. Remove duplicates. Use markdown format with level 2-3 headings and 2-3 level indentation:\n{text}"
+    generation:
+      temperature: 0.3
+      max_tokens: 2048
+  
+  chat:
+    system_prompt:
+      korean: "당신은 친절한 AI 어시스턴트입니다. 한국어로 간단명료하게 답변해주세요."
+      english: "You are a friendly AI assistant. Please provide concise responses in English."
+    concise_instruction:
+      korean: "답변은 간단명료하게 해주세요."
+      english: "Please keep responses concise."
+    exit_keywords: 
+      korean: ["quit", "exit", "bye"]
+      english: ["quit", "exit", "bye"]
+    max_history: 10
+    generation:
+      temperature: 0.7
+      max_tokens: 1024
+
+# Common generation settings
+generation:
+  top_p: 0.9
+  top_k: 10
+
+# Quantization settings
+quantization:
+  enabled: true
+  precision: "int8"
+  compute_dtype: "float16"
+
+# System prompt for all tasks
+prompt: "You are a helpful AI assistant specialized in text analysis and emotional understanding. Please provide detailed and accurate responses."

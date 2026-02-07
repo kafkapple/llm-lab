@@ -1,0 +1,59 @@
+app:
+  project_name: "RAG Pipeline Demo"
+  debug: true
+
+paths:
+  data_dir: "./data"
+  index_dir: "./faiss_index"
+  pdf_path: "./data/all you need is attention.pdf"
+
+# splitter 유형 선택: "character", "recursive", "semantic"
+splitter:
+  type: "recursive"
+  chunk_size: 300
+  chunk_overlap: 30
+
+embeddings:
+  provider: "huggingface"  # huggingface 또는 openai
+  model_configs:
+    huggingface:
+      model_id: "sentence-transformers/all-MiniLM-L6-v2"
+    openai:
+      model_id: "text-embedding-ada-002"
+
+vectorstore:
+  type: "faiss"           # "faiss", "chroma"
+  persist_dir: "./vectorstore"
+
+retriever:
+  type: "ensemble"        # "bm25", "faiss", "ensemble"
+  top_k: 2
+
+llm:
+  provider: "huggingface"
+  model_configs:
+    huggingface:
+      model_id: "Bllossom/llama-3.2-Korean-Bllossom-3B" #"Qwen/Qwen2.5-7B-Instruct"
+      temperature: 0.3
+    openai:
+      model_id: "gpt-3.5-turbo"
+      temperature: 0.3
+
+prompt:
+  style: "default"
+
+
+crawler:
+  start_url: "https://wikidocs.net/231393"
+  max_depth: 3
+  allowed_domains:
+    - "wikidocs.net"
+  exclude_paths:
+    - "/models/"
+    - "/datasets/"
+    - "/spaces/"
+    - "/blog/"
+  max_pages: 50
+
+
+#crawler 항목 예시: start_url(시작 URL), max_depth(재귀 깊이), allowed_domain(크롤 범위 제한).

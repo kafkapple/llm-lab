@@ -1,12 +1,50 @@
-# Python-generated files
+# Python
 __pycache__/
 *.py[oc]
 build/
 dist/
 wheels/
-
 *.egg-info
-.env
+
 # Virtual environments
-.venv
 .venv/
+.env
+
+# ML artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+models/
+offload/
+
+# Data
+data/
+*.csv
+*.parquet
+!configs/**/*.yaml
+
+# Vector stores
+faiss_index/
+vectorstore/
+chroma_db/
+
+# Hydra outputs
+outputs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+wandb/
