@@ -1,0 +1,63 @@
+
+# experiments:
+#   small_model_prompt_matters:
+#     model_order: ["llama3.2", "qwen2.5_3b", "gemma3"]
+#     prompt_order: ["zero_shot_prompt", "few_shot_prompt", "rag_prompt"]
+  
+#   size_matters:
+#     model_order: ["qwen2.5_3b", "qwen2.5", "qwen2.5_14b"]
+#     prompt_order: ["baseline_prompt", "zero_shot_prompt", "few_shot_prompt", "custom_prompt", "rag_prompt"]
+#   open-source_models:
+#     model_order: ["llama3.2", "llama3.1", "llama2_13b", "gemma3", "gemma", "gemma3_12b", "mistral"]
+#     prompt_order: ["baseline_prompt", "zero_shot_prompt", "few_shot_prompt", "custom_prompt", "rag_prompt"]
+#   vs_commercial_models:
+#     model_order: ["llama2_13b", "qwen2.5_14b", "gemma3_12b", "claude-3-5-sonnet-20241022", "claude-3-7-sonnet-20250219", "gpt-4o"]
+#     prompt_order: ["baseline_prompt", "zero_shot_prompt", "few_shot_prompt", "custom_prompt", "rag_prompt"]
+  
+#   embedding_models_rag:
+#     model_order: ["llama3.2", "llama3.1", "llama2_13b", "qwen2.5_3b", "qwen2.5", "qwen2.5_14b", "gemma3", "gemma", "gemma3_12b"]
+#     prompt_order: ["rag_prompt", "rag_prompt-savani", "rag_prompt_sentence-transformers_all-minilm-l6-v2", "rag_prompt_BAAI_bge-m3"]
+#   cot_rag:
+#     model_order: ["llama3.2", "qwen2.5_3b", "gemma3"]
+#     prompt_order: ["cot_prompt", "cot_only_prompt", "rag_prompt", "cot_react_prompt","rag_rerank_prompt","rag_cot_prompt", "rag_rerank_cot_prompt", "rag_cot_react_prompt", "rag_rerank_cot_react_prompt"]
+
+  
+  # all_models:
+  #   model_order: ["llama3.2", "llama3.1", "llama2_13b", "qwen2.5_3b", "qwen2.5", "qwen2.5_14b", "gemma3", "gemma", "gemma3_12b", "mistral", "claude-3-5-sonnet-20241022", "claude-3-7-sonnet-20250219", "gpt-4o"]
+  #   prompt_order: ["baseline_prompt", "zero_shot_prompt", "few_shot_prompt", "custom_prompt", "rag_prompt", "rag_prompt-savani", "rag_prompt_sentence-transformers_all-minilm-l6-v2", "rag_prompt_BAAI_bge-m3"]
+
+round_digits: 1
+style: "seaborn-v0_8-paper"
+font:
+  family: "DejaVu Sans"
+  size: 11
+  title_size: 14
+  label_size: 10
+  value_size: 5
+figure:
+  dpi: 300
+  bbox_inches: "tight"
+  pad_inches: 0.2
+colors:
+  match: ["#2ecc71", "#27ae60", "#1e8449"]
+  mismatch: ["#e74c3c", "#c0392b", "#962e23"] 
+
+options:
+  alpha: 0.8
+  edgecolor: "black"
+  linewidth: 1
+
+palette:
+  unknown: "YlOrRd"
+  error: "#000000" #black
+  metric:
+    precision: "#a6cee3" #"#66c2a5"
+    recall: "#1f78b4" #"#3288bd"
+    f1-score: "#08306b" #"#1f78b4"
+
+table:
+  metric: f1 #'f1'
+  models: all #None
+  prompts: all #['no_persona_prompt', 'zero_shot_prompt', 'few_shot_prompt', 'rag_prompt_BAAI_bge-m3'] #None
+
+

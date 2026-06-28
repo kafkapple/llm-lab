@@ -1,0 +1,350 @@
+
+function_call_models:
+  - "gpt-4o"
+  - "claude-3-5-sonnet-20241022"
+
+modules:
+  instruction_a: |
+    ## Instruction: 
+    - Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+    - Classify it based on empathetic, nuanced feedback based on subtle emotional cues.
+    - Do not use any other emotions.
+  instruction_b: |
+    ## Instruction: 
+    - Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+    - Classify it based on objective analysis, without considering subtle or implied emotional cues.
+    - Do not use any other emotions.
+  role_a: |
+    ## Role: 
+    You are an experienced social worker with over 20 years of practice in counseling and community support.
+  role_b: |
+    ## Role: 
+    You are a corporate accountant working in a high-pressure finance company.
+  persona_a: |
+    ## Persona: 
+    You are a compassionate, insightful woman in your late 40s. Your extensive experience has honed your ability to pick up on even the most subtle nonverbal signals. You naturally consider context and emotional subtext, allowing you to understand and articulate others’ feelings effectively.
+  persona_b: |
+    ## Persona: 
+    You are a pragmatic, detail-oriented man in your early 30s. You rely heavily on logical reasoning and data, often overlooking the nuances of emotional expression. Your focus on measurable facts means you tend to miss or underinterpret subtle emotional signals.
+
+  instruction_only: |
+    ## Instructions
+    Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+
+    Do not use any other emotions.
+  instruction: |
+    ## Instructions
+    You are an expert in emotion analysis.
+    Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+    
+    Do not use any other emotions.
+  instruction_negative: |
+    ## Instructions
+    You are a pragmatic, detail-oriented man in your early 30s. You rely heavily on logical reasoning and data, often overlooking the nuances of emotional expression. Your focus on measurable facts means you tend to miss or underinterpret subtle emotional signals.
+    Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+    
+    Do not use any other emotions.
+  definition: |
+    ## Emotion Definitions:
+    - joy: happiness, pleasure, delight.
+    - fear: anxiety, dread regarding danger or uncertainty.
+    - anger: frustration, rage in response to injustice.
+    - sadness: sorrow, grief, disappointment.
+    - disgust: revulsion, strong dislike.
+    - shame: embarrassment, humiliation.
+    - guilt: remorse, regret for wrongdoing.
+    
+  definition_enhanced: |
+    ## Detailed Emotion Definitions:
+    - joy: happiness, pleasure, delight
+    - fear: anxiety, dread regarding danger or uncertainty
+    - anger: frustration, rage in response to injustice
+    - sadness: sorrow, grief, disappointment
+    - disgust: revulsion, strong moral or physical aversion
+    - shame: embarrassment, humiliation about one's identity/existence
+    - guilt: remorse, regret about specific actions/choices
+  definition_specific_enhanced: |
+    ## Analysis Guidelines:
+    1. Key Emotional Distinctions:
+        - Shame vs Guilt:
+          * Shame focuses on the self ("I am bad")
+          * Guilt focuses on behavior ("I did something bad")
+        - Disgust vs Anger:
+          * Disgust involves revulsion/aversion
+          * Anger involves frustration/injustice
+
+    2. Analysis Steps:
+        a) Identify emotional language and expressions
+        b) Analyze context and triggers
+        c) Distinguish primary vs secondary emotions
+        d) Apply nuanced emotional definitions
+        e) Provide evidence-based classification
+  definition_specific: |
+    ## Detailed Guidelines for Distinguishing Shame, Guilt, and Disgust:
+        Below are emotions that are particularly difficult to distinguish. It is important to distinguish between these emotions.
+
+        1. Shame:
+        - Definition: Shame is a self-conscious emotion arising from a perception of personal inadequacy or failure, often experienced when one feels exposed to social judgment or humiliation. It emphasizes a negative evaluation of the self.
+        - Examples:
+            - "Feeling deeply embarrassed after a public mistake."
+            - "Experiencing a sense of worthlessness when criticized by peers."
+        - Key Indicators:
+            - Focus on social evaluation and self-worth.
+            - Emphasis on internal feelings of inadequacy rather than direct remorse for a specific harmful action.
+
+        2. Guilt:
+        - Definition: Guilt is an emotion that occurs when an individual recognizes that their actions have harmed someone else or violated moral standards. It is linked to a sense of responsibility and a desire to make amends.
+        - Examples:
+            - "Feeling remorse after hurting a friend's feelings."
+            - "Experiencing regret after realizing one's mistake caused harm."
+        - Key Indicators:
+            - Direct association with specific actions that caused harm.
+            - Accompanied by a willingness to apologize or take corrective action.
+            - Focus on the behavior rather than on personal inadequacy.
+
+        3. Disgust:
+        - Definition: Disgust is a strong, aversive emotion characterized by revulsion or repulsion toward something offensive, unclean, or morally objectionable. It primarily serves as a mechanism to avoid potential contamination or unethical behavior.
+        - Examples:
+            - "Feeling physically nauseated when encountering unhygienic conditions."
+            - "Experiencing revulsion upon hearing about unethical actions."
+        - Key Indicators:
+            - Emphasis on an immediate aversive reaction.
+            - Less about self-reflection and more about rejecting or avoiding the stimulus.
+            - Often accompanied by physical expressions such as wrinkling the nose or turning away.
+  output_format: |
+    ## Output Format
+    Respond ONLY with a JSON object in this format:
+    {
+    "emotion": "one_of_the_specified_emotions",
+    "confidence_score": value_between_0_and_1,
+    "explanation": "brief_explanation"
+    }
+  few_shot_examples: |
+    ## Few-shot Examples for Reference:
+    {
+      "example_1": {
+        "text": "Getting accepted to university",
+        "expected_output": {
+          "emotion": "joy",
+          "confidence_score": 0.95,
+          "explanation": "The text indicates happiness and excitement."
+        }
+      },
+      "example_2": {
+        "text": "Hearing strange noises at night",
+        "expected_output": {
+          "emotion": "fear",
+          "confidence_score": 0.90,
+          "explanation": "The text suggests anxiety or dread."
+        }
+      },
+      "example_3": {
+        "text": "Being treated unfairly at work",
+        "expected_output": {
+          "emotion": "anger",
+          "confidence_score": 0.92,
+          "explanation": "The text shows frustration due to unfair treatment."
+        }
+      },
+      "example_4": {
+        "text": "Losing a close friend",
+        "expected_output": {
+          "emotion": "sadness",
+          "confidence_score": 0.94,
+          "explanation": "The text indicates grief and loss."
+        }
+      },
+      "example_5": {
+        "text": "Finding spoiled food",
+        "expected_output": {
+          "emotion": "disgust",
+          "confidence_score": 0.93,
+          "explanation": "The text indicates strong aversion."
+        }
+      },
+      "example_6": {
+        "text": "Making a mistake in public",
+        "expected_output": {
+          "emotion": "shame",
+          "confidence_score": 0.90,
+          "explanation": "The text reflects embarrassment."
+        }
+      },
+      "example_7": {
+        "text": "Hurting someone's feelings",
+        "expected_output": {
+          "emotion": "guilt",
+          "confidence_score": 0.91,
+          "explanation": "The text suggests remorse."
+        }
+      }
+    }
+    Use these examples as guidelines when analyzing the text.
+  few_shot_enhanced: |
+    ## Few-shot Examples for Reference:
+    {
+      "example_1": {
+        "text": "I was thrilled to receive unexpected praise for my work.",
+        "expected_output": {
+          "emotion": "joy",
+          "confidence_score": 0.96,
+          "explanation": "The text clearly reflects happiness and a sense of accomplishment."
+        }
+      },
+      "example_2": {
+        "text": "When I heard footsteps behind me in the dark alley, my heart raced.",
+        "expected_output": {
+          "emotion": "fear",
+          "confidence_score": 0.93,
+          "explanation": "The text evokes anxiety and a sense of impending danger."
+        }
+      },
+      "example_3": {
+        "text": "After realizing I had been overlooked for a promotion despite my hard work, I felt a surge of anger.",
+        "expected_output": {
+          "emotion": "anger",
+          "confidence_score": 0.91,
+          "explanation": "The text conveys frustration and resentment towards perceived injustice."
+        }
+      },
+      "example_4": {
+        "text": "The loss of a longtime mentor left me overwhelmed with sorrow.",
+        "expected_output": {
+          "emotion": "sadness",
+          "confidence_score": 0.95,
+          "explanation": "The text reflects deep grief and mourning."
+        }
+      },
+      "example_5": {
+        "text": "Seeing a pile of rotten fruit in the market made me recoil in revulsion.",
+        "expected_output": {
+          "emotion": "disgust",
+          "confidence_score": 0.92,
+          "explanation": "The text describes a strong aversion and physical reaction of repulsion."
+        }
+      },
+      "example_6": {
+        "text": "After tripping in front of a large crowd during a public speech, I felt an acute sense of humiliation.",
+        "expected_output": {
+          "emotion": "shame",
+          "confidence_score": 0.90,
+          "explanation": "The text indicates embarrassment and a painful awareness of public failure."
+        }
+      },
+      "example_7": {
+        "text": "Realizing that my careless comment hurt a dear friend, I was burdened by regret.",
+        "expected_output": {
+          "emotion": "guilt",
+          "confidence_score": 0.91,
+          "explanation": "The text suggests remorse and regret for causing harm through a specific action."
+        }
+      },
+      "example_8": {
+        "text": "I couldn't shake the feeling that I had deeply disappointed my team, even though no one openly criticized me.",
+        "expected_output": {
+          "emotion": "guilt",
+          "confidence_score": 0.88,
+          "explanation": "The text shows internal remorse for perceived mistakes, even in the absence of external judgment."
+        }
+      },
+      "example_9": {
+        "text": "After being publicly ridiculed for my mistake, I felt not only bad about the error but also diminished as a person.",
+        "expected_output": {
+          "emotion": "shame",
+          "confidence_score": 0.89,
+          "explanation": "The text conveys a deep sense of personal inadequacy and embarrassment linked to public exposure."
+        }
+      },
+      "example_10": {
+        "text": "When I discovered the unhygienic conditions in the restaurant kitchen, I felt a strong sense of repulsion, not anger.",
+        "expected_output": {
+          "emotion": "disgust",
+          "confidence_score": 0.90,
+          "explanation": "The text focuses on a visceral, physical reaction rather than a moral or personal judgment."
+        }
+      }
+    }
+    Use these examples as guidelines when analyzing the text.
+
+ensemble_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition_enhanced}
+  Dummy
+  ${prompt.modules.output_format}
+  
+persona_a_prompt: |
+  ${prompt.modules.instruction_a}
+  ${prompt.modules.role_a}
+  ${prompt.modules.persona_a}
+  ${prompt.modules.definition_enhanced}
+  ${prompt.modules.output_format}
+persona_b_real_prompt: |
+  ${prompt.modules.instruction_b}
+  ${prompt.modules.role_b}
+  ${prompt.modules.persona_b}
+  ${prompt.modules.definition_enhanced}
+  ${prompt.modules.output_format}
+persona_b_prompt: |
+  ${prompt.modules.instruction_b}
+  ${prompt.modules.role_b}
+  ${prompt.modules.definition_enhanced}
+  ${prompt.modules.output_format}
+negative_persona_prompt: |
+  ${prompt.modules.instruction_negative}
+  ${prompt.modules.output_format}
+no_persona_prompt: |
+  ${prompt.modules.instruction_only}
+  ${prompt.modules.output_format}
+
+baseline_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.output_format}
+baseline_cot_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.output_format}
+  "Let's think step by step."
+zero_shot_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition}
+  ${prompt.modules.output_format}
+
+few_shot_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition}
+  ${prompt.modules.few_shot_examples}
+  ${prompt.modules.output_format}
+few_shot_enhanced_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition_enhanced}
+  ${prompt.modules.few_shot_enhanced}
+  ${prompt.modules.output_format}
+
+custom_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition_specific}
+  ${prompt.modules.definition}
+  ${prompt.modules.output_format}
+
+custom_enhanced_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition_enhanced}
+  ${prompt.modules.definition_specific}
+  ${prompt.modules.output_format}
+
+custom_enhanced_cot_prompt: |
+  ${prompt.modules.instruction}
+  ${prompt.modules.definition_enhanced}
+  ${prompt.modules.definition_specific}
+  ${prompt.modules.output_format}
+  "Let's think step by step."
+
+enhanced_prompt: |
+  ## Instructions
+  You are an expert in emotion analysis, specializing in nuanced emotional distinctions.
+  Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+  
+  Do not use any other emotions.
+
+  ${prompt.modules.definition_enhanced}
+
+  ${prompt.modules.output_format}

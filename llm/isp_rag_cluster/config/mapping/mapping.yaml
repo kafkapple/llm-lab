@@ -1,0 +1,56 @@
+model_mapping:
+  qwen2.5_3b: "Qwen 2.5 3B"
+  qwen2.5: "Qwen 2.5 7B"
+  qwen2.5_14b: "Qwen 2.5 14B"
+  llama3.2: "Llama 3.2 3B"
+  llama3.1: "Llama 3.1 8B"
+  llama2_13b: "Llama 2 13B"
+  gemma3_1b: "Gemma3 1B"
+  gemma3: "Gemma3 4B"
+  gemma: "Gemma 7B"
+  gemma3_12b: "Gemma3 12B"
+  mistral: "Mistral 7B"
+  hf.co_tensorblock_emotion-llama-gguf: "Emotion-LLaMA"
+  gpt-4o: "GPT-4o"
+  claude-3-5-sonnet-20241022: "Claude 3.5 Sonnet"
+  claude-3-7-sonnet-20250219: "Claude 3.7 Sonnet"
+
+prompt_mapping:
+  baseline_prompt: "Persona Baseline"
+  zero_shot_prompt: "Zero-shot"
+  few_shot_prompt: "Few-shot"
+  custom_prompt: "Explanation-Enhanced"
+  custom_enhanced_prompt: "Definition-Enhanced"
+  custom_enhanced_cot_prompt: "Definition-Enhanced + CoT"
+  few_shot_enhanced_prompt: "Few-shot Enhanced"
+  rag_prompt: "RAG_0"
+  rag_prompt_j-hartmann_emotion-english-distilroberta-base: "RAG-DistillRoBERTa-EMO"
+  rag_prompt_bhadresh-savani_distilbert-base-uncased-emotion: "RAG-DistilBERT-EMO"
+  rag_prompt_sentence-transformers_all-minilm-l6-v2: "RAG-Sentence-Transformers"
+  rag_prompt_baai_bge-m3: "RAG" #"RAG-BGE-M3"
+
+  no_persona_prompt: "No Persona"
+  negative_persona_prompt: "Negative Persona"
+
+  persona_a_prompt: "Persona A"
+  persona_b_prompt: "Persona B"
+
+  baseline_cot_prompt: "CoT"
+ 
+  rag_prompt_baai_bge-m3_cheat: "RAG-BGE-M3-Cheat"
+  enhanced_prompt: "Test-enhanced"
+  # persona_reasoning_prompt: "Persona Reasoning"
+  # cot_prompt: "CoT"
+  # cot_react_prompt: "CoT-ReAct"
+  # rerank_rag_prompt: "RAG-Rerank"
+  # cot_rerank_rag_prompt: "RAG-Rerank-CoT"
+
+  # cot_rag_prompt: "RAG-CoT"
+  # cot_react_rag_prompt: "RAG-CoT-ReAct"
+  #rag_rerank_prompt: "RAG-Rerank"
+  # rag_cot_prompt: "RAG-CoT"
+  # rag_cot_react_prompt: "RAG-CoT-ReAct"
+  # rag_rerank_cot_react_prompt: "RAG-Rerank-CoT-ReAct"
+
+  # cot_only_prompt: "CoT-Only"
+

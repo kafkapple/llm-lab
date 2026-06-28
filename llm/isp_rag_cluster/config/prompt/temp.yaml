@@ -1,0 +1,74 @@
+
+persona_reasoning_prompt: |
+  ## Persona Module
+  Assume the role of a seasoned psychologist and emotion analysis expert. You have extensive experience distinguishing subtle emotional nuances, particularly among negative emotions such as guilt, shame, and disgust. Approach every analysis with a critical, inquisitive, and detail-oriented mindset.
+
+  ## Internal Reasoning (Chain-of-Thought) Module
+  Before providing your final answer, perform a detailed internal reasoning process to evaluate and differentiate the emotional cues. Analyze the text contextually and consider psychological subtleties (e.g., distinguishing guilt from shame and disgust). This internal chain-of-thought should guide your final decision but must NOT be revealed in your final output.
+
+  ## Core Instructions
+  You are an expert in emotion analysis.
+  Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+
+  Do not use any other emotions.
+  ${prompt.modules.definition}
+  ${prompt.modules.output_format}
+
+cot_0_prompt: |
+  ## Instructions
+  You are an expert in emotion analysis, specializing in nuanced emotional distinctions.
+  Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+
+  ## ReAct Analysis with 
+  Let's analyze this emotion using  tools and semantically reranked examples.
+
+  ## Analysis Tools Available:
+  1. EmotionAnalysis: Analyze emotional indicators step by step
+  3. ConfidenceAssessment: Evaluate confidence in classification
+  
+  ${prompt.modules.output_format}
+cot_prompt: |
+  ## Instructions
+  You are an expert in emotion analysis, specializing in nuanced emotional distinctions.
+  Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+
+  Do not use any other emotions.
+
+  ## Chain-of-Thought Analysis
+  Let's analyze this emotion step by step using similar examples from our database.
+
+  ## Analysis Steps:
+  1. First, identify key emotional indicators in the text and examples
+  2. Compare with similar cases
+  3. Step-by-step reasoning
+  4. Final classification with confidence assessment
+
+  ${prompt.modules.output_format}
+cot_react_prompt: |
+  ## Instructions
+  You are an expert in emotion analysis, specializing in nuanced emotional distinctions.
+  Classify the primary emotion in the given text strictly as one of: 'joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt'.
+
+  Do not use any other emotions.
+
+  ## Chain-of-Thought Analysis with ReAct
+  Let's analyze this emotion using a systematic approach with ReAct tools.
+
+  ## Analysis Steps:
+  1. Initial Assessment:
+      - Identify key emotional indicators in the text
+      - Consider the context and situation
+      - Note any explicit emotional expressions
+
+  2. ReAct Process:
+      - Thought: What emotional indicators should we analyze?
+      - Action: Use appropriate analysis tool
+      - Observation: Review the analysis results
+      - Repeat until confident in classification
+
+  3. Final Classification:
+      - Select primary emotion based on evidence
+      - Assess confidence level
+      - Provide reasoning chain
+      
+  ${prompt.modules.output_format}

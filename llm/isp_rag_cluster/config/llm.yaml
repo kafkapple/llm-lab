@@ -1,0 +1,102 @@
+defaults:
+  - _self_
+  - prompt: prompt
+  - mapping: mapping
+  - plotting: plot_config
+
+general:
+  run_name: ${now:%Y%m%d_%H%M%S}
+  outputs: ${hydra:runtime.output_dir}
+  random_state: 42
+  seed: 42
+  output_path: 'outputs/${general.run_name}'
+  result_path: 'results/${data.name}'
+  retry:
+    max_retries: 2  # 최대 재시도 횟수
+    retry_delay: 1.0
+    save_retry_count: true  # 재시도 횟수를 CSV에 저장할지 여부
+    retry_on_json_error: true #true  # JSON 파싱 오류 시 재시도 여부
+    retry_on_missing_fields: true  # 필수 필드 누락 시 재시도 여부
+  logging:
+    save_prompts: true
+    save_responses: true
+    save_retry_count: true
+    cot_verbose: true  # CoT 상세 로깅 활성화 여부
+    log_path: 'logs'
+    log_level: INFO
+    log_interval: 100
+
+    # voting_method: "weighted"  # weighted, majority, or highest_confidence
+
+data:
+  name: "isear"
+  n_samples: -1
+
+  default_emotion: "unknown"  # 유효하지 않은 감정 레이블에 대한 기본값
+  save_preprocessed_data: false
+  auto_detect_encoding: false #true  # 인코딩 자동 감지 활성화 여부
+  encoding: "utf-8"  # 자동 감지가 비활성화된 경우 사용할 인코딩
+  datasets:
+    isear:
+      urls:
+        - "https://raw.githubusercontent.com/sinmaniphel/py_isear_dataset/master/isear.csv"
+      required_columns: ["SIT", "EMOT"]
+      column_mapping:
+        SIT: text
+        EMOT: emotion
+      separator: "|"
+      path: 'data/isear/isear.csv'
+      labels: ['joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt']
+    goemotions:
+      urls:
+        - "https://raw.githubusercontent.com/dair-ai/emotion-dataset/main/data/goemotions/goemotions_single_isear_without_neutral.csv"
+      required_columns: ["text", "isear_label"]
+      column_mapping:
+        text: text
+        isear_label: emotion
+      separator: ","
+      path: 'data/goemotions/goemotions_single_isear_without_other&neutral.csv'
+      labels: ['joy', 'fear', 'anger', 'sadness', 'disgust', 'shame', 'guilt']
+
+  exclude_length: 77
+  exclude_phrases:
+    - "no response"
+    - "can not think of anything just now"
+    - "can not think of any situation"
+    - "can not remember"
+    - "never experienced"
+    - "never felt the emotion"
+    - "i have never felt this emotion"
+    - "none"
+    - "blank"
+model:
+  type: "ollama" # "openai" #"ollama"
+  name: "gemma3:1b" #"qwen2.5:14b" #"qwen2.5" #"hf.co/tensorblock/Emotion-LLaMA-GGUF"
+  max_tokens: 100
+  temperature: 0.1
+  template: "ensemble_prompt" #"rag_rerank_cot_prompt" #"cot_prompt" #rag_rerank_prompt "cot_react_prompt" #"cot_react_prompt" #"enhanced_prompt" # #"rag_rerank_cot_prompt"  # RAG 템플릿 직접 지정
+  timeout: 30
+  ensemble:
+    model_folders: ['20250324_220056_gpt-4o_rag_prompt_baai_bge-m3', '20250324_220110_claude-3-5-sonnet-20241022_rag_prompt_baai_bge-m3']  # List of folders containing model predictions
+    confidence_threshold: 0.5  # Minimum confidence score to consider a prediction
+    is_correct: true
+  function_calling: false
+  function_call_models:
+    - "gpt-4o"
+    - "gemma3"
+  
+  resume_from_lora: false
+  lora_path: "outputs/20250316_172525/checkpoints/checkpoint-1000"
+
+rag:
+  k_examples: 7
+  threshold: 0.1
+  cheat: false  # cheat 모드 활성화 여부
+  embedding_model: "BAAI/bge-m3" #"bge-m3" #"j-hartmann/emotion-english-distilroberta-base"
+  db_path: "data/vector_db"
+  save_db: true
+  load_db: true
+  reranking_model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  max_cache_size: 10000  # 캐시할 최대 항목 수
+  enable_cache: true     # 캐시 활성화 여부
+  

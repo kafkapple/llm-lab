@@ -1,0 +1,15 @@
+streamlit
+PyMuPDF
+langchain
+langchain-community
+langchain-core
+sentence-transformers
+llama-cpp-python
+openai
+langchain-openai
+tqdm
+tiktoken 
+faiss-cpu 
+#faiss-gpu # linux only
+python-dotenv
+
