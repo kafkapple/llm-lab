@@ -31,10 +31,7 @@ cells = [
 F1 비열등성 한계 −0.02를 통과했다. 4bit-NC는 평균 차이가 작아도 CI 하한이 기준을
 넘었고, 무보정 FP8 E4M3은 품질이 붕괴했다.
 
-산출물 지도: [README](../README.md) ·
-[이론 SSOT](../../../QuantumAI/_Agent/260728_TurboQuant_이론과_PoC_가이드.md) ·
-[연구제안서](../../../QuantumAI/_Agent/260728_TurboQuant_QuantumQuant_연구제안서.md) ·
-[private GitHub](https://github.com/kafkapple/quantumai-tech-poc)
+산출물 지도: [README](../README.md)
 """),
     md("""
 ## 먼저 보는 전체 지도
