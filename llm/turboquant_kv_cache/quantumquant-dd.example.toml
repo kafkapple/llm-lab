@@ -1,0 +1,9 @@
+method_version = ""
+algorithm_spec = ""
+target_tensors = []
+effective_bits_formula = ""
+packing_format = ""
+reference_decoder = ""
+artifact_license = ""
+benchmark_provenance = ""
+claims = []

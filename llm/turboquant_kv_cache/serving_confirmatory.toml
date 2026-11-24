@@ -1,0 +1,27 @@
+[provenance]
+created_at = "2026-07-28T22:47:00+09:00"
+model_revision = "a09a35458c702b33eeacc393d103063234e8bc28"
+
+[experiment]
+model = "Qwen/Qwen2.5-7B-Instruct"
+restarts = 3
+seed = 20260728
+gpu_memory_utilization = 0.70
+max_model_len = 8192
+warmup_prompts = 64
+turboquant_short_warmup_prompts = 1000
+jit_clean_retries = 1
+
+[[workload]]
+name = "short"
+num_prompts = 1000
+input_tokens = 256
+output_tokens = 64
+max_concurrency = 64
+
+[[workload]]
+name = "long"
+num_prompts = 256
+input_tokens = 4096
+output_tokens = 128
+max_concurrency = 16

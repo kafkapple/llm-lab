@@ -1,0 +1,7 @@
+data/
+output/
+results/*/
+results/*.log
+results/*.pid
+.ipynb_checkpoints/
+.playwright-cli/

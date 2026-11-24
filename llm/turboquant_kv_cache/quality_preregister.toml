@@ -1,0 +1,21 @@
+[experiment]
+dataset = "THUDM/LongBench:hotpotqa"
+source = "https://huggingface.co/datasets/THUDM/LongBench/resolve/main/data.zip"
+sample_size = 50
+sample_seed = 20260728
+model = "Qwen/Qwen3-0.6B"
+max_model_len = 16384
+max_output_tokens = 64
+
+[metric]
+primary = "normalized_token_f1"
+aggregation = "mean"
+comparison = "paired_bootstrap"
+bootstrap_samples = 10000
+confidence = 0.95
+non_inferiority_margin = -0.02
+baseline_floor = 0.10
+
+[decision]
+rule = "lower_95_ci_of_mean_delta_vs_bf16 >= -0.02 AND bf16_mean_f1 >= 0.10"
+note = "Failure of the baseline floor makes non-inferiority uninformative."

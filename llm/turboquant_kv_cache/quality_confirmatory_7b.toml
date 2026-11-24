@@ -1,0 +1,25 @@
+[provenance]
+created_at = "2026-07-28T22:47:00+09:00"
+longbench_commit = "2e00731f8d0bff23dc4325161044d0ed8af94c1e"
+data_sha256 = "a0005ab2a1bc2ac3a70352dccbf96cccc4e0aac6bb677f6a55180fa51b92ef6f"
+model_revision = "a09a35458c702b33eeacc393d103063234e8bc28"
+
+[experiment]
+dataset = "hotpotqa"
+model = "Qwen/Qwen2.5-7B-Instruct"
+sample_size = 200
+sample_seed = 20260728
+max_model_len = 16384
+max_output_tokens = 32
+gpu_memory_utilization = 0.70
+prompt_template = "Answer the question based on the given passages. Only give me the answer and do not output any other words.\n\nThe following are given passages.\n{context}\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:"
+
+[metric]
+primary = "longbench_qa_f1"
+bootstrap_samples = 10000
+confidence = 0.95
+non_inferiority_margin = -0.02
+baseline_floor = 0.20
+
+[decision]
+rule = "lower_95_ci_of_mean_delta_vs_bf16 >= -0.02 AND bf16_mean_f1 >= 0.20"

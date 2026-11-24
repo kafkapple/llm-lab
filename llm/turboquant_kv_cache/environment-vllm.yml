@@ -1,0 +1,13 @@
+name: quantumai-vllm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pandas
+  - matplotlib
+  - jupyterlab
+  - nbclient
+  - pip:
+      - vllm==0.26.0
+      - ninja

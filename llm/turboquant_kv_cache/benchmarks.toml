@@ -1,0 +1,36 @@
+[common]
+seeds = [0, 1, 2]
+warmup_steps = 10
+report_mean_std = true
+hardware = "gpu03 RTX PRO 6000 Blackwell"
+
+[quantization]
+priority = 1
+focus = "TurboQuant/QuantumQuant KV-cache quantization; ANN deferred"
+reference = "BF16-KV"
+stage1_model = "Qwen2.5-1.5B"
+stage1_context = 16384
+stage1_gpus = 1
+baselines = ["BF16-KV", "native-FP8-KV", "strong-supported-INT4-KV", "TurboQuant-MSE-4b", "TurboQuant-IP-4b"]
+quality = ["paired_quality_noninferiority_ci", "q_weighted_qk_rmse", "inner_product_bias", "attention_output_error"]
+deployment = ["serialized_bytes_per_token", "device_slope_bytes_per_token", "max_resident_kv_tokens", "ttft_p50_p95_p99", "tpot_p50_p95_p99", "requests_per_second"]
+min_requests_per_cell = 1000
+process_restarts = 3
+max_tuning_trials_per_method = 8
+
+[data2vec]
+priority = 2
+baselines = ["random-linear-probe", "supervised-from-scratch", "local-target-mask", "ema-no-context-average", "data2vec-contextual-target"]
+modalities = ["speech", "vision", "language"]
+label_fractions = [0.01, 0.10, 1.00]
+metrics = ["linear_probe", "full_finetune", "gpu_hours", "samples_per_second"]
+
+[mamba]
+priority = 3
+reference = "Transformer++-FlashAttention2"
+baselines = ["Mamba", "S4D"]
+lengths = [128, 512, 2048, 8192, 32768]
+batches = [1, 8, 32]
+quality = ["perplexity", "downstream_accuracy"]
+efficiency = ["train_tokens_per_second", "prefill_latency", "decode_tpot", "peak_gpu_memory"]
+quality_gate_relative = 0.01
