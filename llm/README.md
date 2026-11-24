@@ -56,6 +56,10 @@
   # 특정 모델 및 훈련 속성 오버라이드
   python main.py model=kobart train=finetune
   ```
+### ⑦ **`turboquant_kv_cache/`** (KV cache 양자화 학습용 단일 노트북)
+* **설명**: vLLM TurboQuant KV cache 양자화를 Qwen2.5-7B, HotpotQA 200문항에서 평가한 PoC 의 학습용 사본입니다.
+* **실행**: GPU 없이 저장된 요약 CSV 로 재현합니다. 상세는 하위 README 를 봅니다.
+
 
 ### ⑤ **`llava_emotion/`** (멀티모달 이미지/비디오 감정 분석)
 * **설명**: LLaVA-NeXT-Video 모델을 활용해 시각 데이터를 바탕으로 감정 상태와 행동 양식을 서술하고 분류하는 멀티모달 실험 공간입니다.
