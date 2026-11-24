@@ -1,0 +1,7 @@
+family,model,parameters,revision,kv_dtype,status,kv_tokens,arithmetic_pass,capital_pass,needle_pass,failure_reason
+Llama,meta-llama/Llama-3.2-1B-Instruct,1235814400,9213176726f574b556790deb65791e0c5aa438b6,auto,executed,2065888,True,True,False,
+Llama,meta-llama/Llama-3.2-1B-Instruct,1235814400,9213176726f574b556790deb65791e0c5aa438b6,turboquant_k8v4,executed,3804800,True,False,False,
+Gemma,google/gemma-3-1b-it,999885952,dcc83ea841ab6100d6b47a070329e1ba4cf78752,auto,executed,2371479,True,True,False,
+Gemma,google/gemma-3-1b-it,999885952,dcc83ea841ab6100d6b47a070329e1ba4cf78752,turboquant_k8v4,unsupported,,False,False,False,"No valid attention backend found for cuda with AttentionSelectorConfig(head_size=256, dtype=torch.bfloat16, kv_cache_dtype=turboquant_k8v4, block_size=None, use_mla=False, has_sink=False, use_sparse=False, use_mm_prefix=False, use_per_head_quant_scales=False, attn_type=AttentionType.DECODER, has_sliding_window=True, use_non_causal=False, use_batch_invariant=False, use_kv_connector=False, use_pcp=False). Reasons: {FLASH_ATTN: [kv_cache_dtype not supported], FLASHINFER: [kv_cache_dtype not supported], TRITON_ATTN: [kv_cache_dtype not supported], FLEX_ATTENTION: [kv_cache_dtype not supported], TURBOQUANT: [sliding window not supported]}."
+Qwen,Qwen/Qwen2.5-1.5B-Instruct,1543714304,989aa7980e4cf806f80c7fef2b1adb7bc71aa306,auto,executed,2333696,True,True,False,
+Qwen,Qwen/Qwen2.5-1.5B-Instruct,1543714304,989aa7980e4cf806f80c7fef2b1adb7bc71aa306,turboquant_k8v4,executed,4954976,True,True,False,
